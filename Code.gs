@@ -15,7 +15,7 @@ function viewCharts() {
   .setWidth(750)
   .setSandboxMode(HtmlService.SandboxMode.IFRAME);
   
-  SpreadsheetApp.getUi().showModelessDialog(html, "Proofreading Trend Chart")
+  SpreadsheetApp.getUi().showModelessDialog(html, "Trend Charts")
 }
 
 function getDataTable(type) {
