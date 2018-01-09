@@ -1,0 +1,54 @@
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      
+    
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(getTimeArray);
+    
+      function onSuccess(my_array) {
+        var time_data_table = google.visualization.arrayToDataTable(my_array[0]);
+        var IF_data_table = google.visualization.arrayToDataTable(my_array[1]);
+        var QR_data_table = google.visualization.arrayToDataTable(my_array[2]);
+        var CPI_data_table = google.visualization.arrayToDataTable(my_array[3]);
+        var time_options = {smoothLine: true, 
+                            height: 370, 
+                            width: 732,
+                            hAxis: {slantedText: true}}
+        var IF_options = {smoothLine: true, 
+                          height: 370, 
+                          width: 732, 
+                          vAxis: {direction: -1},
+                          hAxis: {slantedText: true}}
+        var QR_options = {height: 370, 
+                          width: 732,
+                          hAxis: {slantedText: true},
+                          vAxis: {ticks: [{v:0, f:'F \n'},
+                                          {v:1, f:'E '},
+                                          {v:2, f:'D '},
+                                          {v:3, f:'C '},
+                                          {v:4, f:'B2'},
+                                          {v:5, f:'B1'},
+                                          {v:6, f:'A2'},
+                                          {v:7, f:'A1'},
+                                          {v:8, f:'A0'},
+                                          {v:9, f:'  '},
+                                          {v:10, f:'  '}]}}
+        var CPI_options = {smoothLine: true, 
+                            height: 370, 
+                            width: 732,
+                            hAxis: {slantedText: true}}
+        var time_chart = new google.visualization.LineChart(document.getElementById('time_vis_div'));
+        var IF_chart = new google.visualization.LineChart(document.getElementById('IF_vis_div'));
+        var QR_chart = new google.visualization.ColumnChart(document.getElementById('QR_vis_div'));
+        var CPI_chart = new google.visualization.LineChart(document.getElementById('CPI_vis_div'));
+        time_chart.draw(time_data_table, time_options);
+        IF_chart.draw(IF_data_table, IF_options);
+        QR_chart.draw(QR_data_table, QR_options);
+        CPI_chart.draw(CPI_data_table, CPI_options);
+      }
+      
+      function getTimeArray() {
+        google.script.run.withSuccessHandler(onSuccess).getDataTables(["Time", "IF", "QR", "CPI"]);
+      }
+
+    </script>

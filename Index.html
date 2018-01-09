@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('Stylesheet') ?>
+    <?!= include('Javascript') ?>
+  </head>
+  <body>
+  
+  <!-- Tab links -->
+  <div id="tabs">
+    <ul id="navigation">
+      <li class="selected"><a href="#time_vis_div">Time&nbsp;Score</a></li>
+      <li><a href="#IF_vis_div">IF&nbsp;Score</a></li>
+      <li><a href="#QR_vis_div">Quality&nbsp;Review</a></li>
+      <li><a href="#CPI_vis_div">CPI</a></li>
+      <li id="filler"></li>
+    </ul>
+    <div id="time_vis_div" class="tabcontent"></div>
+    <div id="IF_vis_div" class="tabcontent"></div>
+    <div id="QR_vis_div" class="tabcontent"></div>
+    <div id="CPI_vis_div" class="tabcontent"></div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#tabs" ).tabs();
+  } );
+  </script>
+  
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
