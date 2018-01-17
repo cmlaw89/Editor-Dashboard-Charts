@@ -38,7 +38,7 @@ function getDataTable(type) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var pivot_sheet = ss.getSheetByName("Quality History");
   
-  
+  var user = pivot_sheet.getRange(1, 9).getValue().split(" ")[1].slice(0, -1);
   
   //Data for QR column chart 
   if (type == "QR") {
@@ -119,7 +119,7 @@ function getDataTable(type) {
     
     //Add data series labels
     var labels = [{label: 'Month', id: 'Month'}, 
-                {label: 'Chris', id: "Chris", type: 'number'}];
+                {label: user, id: user, type: 'number'}];
     if (type == "IF" || type == "Time") {
       labels.push({label: 'Team Average', id: "TAvg", type: 'number'});
     }
