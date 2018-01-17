@@ -170,15 +170,6 @@ function getDataTable(type) {
   return data_table
 }
 
-function getDataTables(types) {
-  
-  var data_tables = [];
-  for (var i = 0; i < types.length; i++) {
-    data_tables.push(getDataTable(types[i]))
-  }
-  return data_tables
-}
-
 
 function include(filename) {
   //Adds stylesheet and javascript to Index.html
