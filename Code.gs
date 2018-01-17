@@ -1,6 +1,6 @@
 function onOpen() {
     SpreadsheetApp.getUi()
-      .createMenu('Wallace Quality')
+      .createMenu('Wallace')
       .addItem('Trend Charts', 'viewCharts')
       .addToUi();
 }
