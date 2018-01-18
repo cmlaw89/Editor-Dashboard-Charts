@@ -20,7 +20,7 @@ function viewCharts() {
 
 function getDataTable(type) {
   //Extracts and formats the data for use in google.visualization.arrayToDataTable()
-  
+  //type="QR";
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var pivot_sheet = ss.getSheetByName("Quality History");
   
@@ -96,16 +96,16 @@ function getDataTable(type) {
       if ((Object.keys(QR_dic).indexOf(current_month_year) != -1) || (Object.keys(PR_avg).indexOf(current_month_year) != -1)) {
         var entry = [current_month_year];
         if (Object.keys(QR_dic).indexOf(current_month_year) != -1) {
-          entry.push(QR_dic[current_month_year])
+          entry.push({v:QR_dic[current_month_year], f:getGrade(QR_dic[current_month_year], "QR")})
         }
         else {
-          entry.push(null);
+          entry.push({v:null, f:null});
         }
         if (Object.keys(PR_avg).indexOf(current_month_year) != -1) {
-          entry.push(PR_avg[current_month_year])
+          entry.push({v:PR_avg[current_month_year], f:getGrade(QR_dic[current_month_year], "PR")})
         }
         else {
-          entry.push(null);
+          entry.push({v:null, f:null});
         }
         data_table.splice(1, 0, entry);
         entry_counter += 1;
@@ -181,17 +181,10 @@ function getDataTable(type) {
       }
     }
   }
-  
+  Logger.log(data_table)
   return data_table
 }
 
-
-function include(filename) {
-  //Adds stylesheet and javascript to Index.html
-  
-  return HtmlService.createHtmlOutputFromFile(filename)
-      .getContent();
-}
 
 function dateToMonthYear(date) {
   
@@ -210,4 +203,93 @@ function dateToMonthYear(date) {
   
   return months[date.getMonth() + 1] + " " + date.getFullYear().toString().slice(2,4);
 }
+
+function getGrade(score, stage) {
+  if (score < 1) {
+    return "F"
+  }
+  else if ((score < 2) && (score >= 1)) {
+    if (stage == "QR") {
+      return "E"
+    }
+    else if (stage == "PR") {
+      return "F"
+    }
+  }
+  else if ((score >= 1) && (score < 2)) {
+    if (stage == "QR") {
+      return "D"
+    }
+    else if (stage == "PR") {
+      return "E"
+    }
+  }
+  else if ((score >= 3) && (score < 4)) {
+    if (stage == "QR") {
+      return "C"
+    }
+    else if (stage == "PR") {
+      return "D"
+    }
+  }
+  else if ((score >= 4) && (score < 5)) {
+    if (stage == "QR") {
+      return "B2"
+    }
+    else if (stage == "PR") {
+      return "C"
+    }
+  }
+  else if ((score >= 5) && (score < 6)) {
+    if (stage == "QR") {
+      return "B1"
+    }
+    else if (stage == "PR") {
+      return "B2"
+    }
+  }
+  else if ((score >= 6) && (score < 7)) {
+    if (stage == "QR") {
+      return "A2"
+    }
+    else if (stage == "PR") {
+      return "B1"
+    }
+  }
+  else if ((score >= 7) && (score < 8)) {
+    if (stage == "QR") {
+      return "A1"
+    }
+    else if (stage == "PR") {
+      return "A2"
+    }
+  }
+  else if ((score >= 8) && (score < 9)) {
+    if (stage == "QR") {
+      return "A0"
+    }
+    else if (stage == "PR") {
+      return "A1"
+    }
+  }
+  else if (score >= 9) {
+    return "A0"
+  }
+}
+
+
+function include(filename) {
+  //Adds stylesheet and javascript to Index.html
+  
+  return HtmlService.createHtmlOutputFromFile(filename)
+      .getContent();
+}
+
+
+
+
+
+
+
+
 
