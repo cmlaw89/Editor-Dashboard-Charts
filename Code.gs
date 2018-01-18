@@ -109,7 +109,7 @@ function getDataTable(type) {
         else {
           entry.push(null);
         }
-        data_table.push(entry)
+        data_table.splice(1, 0, entry);
         entry_counter += 1;
       }
       date.setMonth(date.getMonth() - 1)
