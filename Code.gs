@@ -85,7 +85,7 @@ function getDataTable(type) {
     }
     
     var data_table = [labels];
-    var start_month = 1
+    var start_month = 0
     if (QR_months > 12) {
       start_month = QR_months - 12;
     }
