@@ -20,7 +20,7 @@ function viewCharts() {
 
 function getDataTable(type) {
   //Extracts and formats the data for use in google.visualization.arrayToDataTable()
-  //type="QR";
+  
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var pivot_sheet = ss.getSheetByName("Quality History");
   
@@ -181,7 +181,7 @@ function getDataTable(type) {
       }
     }
   }
-  Logger.log(data_table)
+  
   return data_table
 }
 
