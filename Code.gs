@@ -102,7 +102,7 @@ function getDataTable(type) {
           entry.push({v:null, f:null});
         }
         if (Object.keys(PR_avg).indexOf(current_month_year) != -1) {
-          entry.push({v:PR_avg[current_month_year], f:getGrade(QR_dic[current_month_year], "PR")})
+          entry.push({v:PR_avg[current_month_year], f:getGrade(PR_avg[current_month_year], "PR")})
         }
         else {
           entry.push({v:null, f:null});
