@@ -33,8 +33,8 @@ function getDataTable(type) {
     var QR_month_data = pivot_sheet.getRange(4, 19, QR_months, 1).getValues();
     var QR_data = pivot_sheet.getRange(4, 22, QR_months, 1).getValues();
     
+    var QR_dic = {}
     if (QR_months > 0) {
-      var QR_dic = {}
       for (var i = 0; i < QR_months; i++) {
         var month_year = dateToMonthYear(QR_month_data[i][0]);
         if (Object.keys(QR_dic).indexOf(month_year) == -1) {
@@ -55,13 +55,13 @@ function getDataTable(type) {
     }
     
     var PR_months = pivot_sheet.getRange("D1").getValue();
+    var PR_avg = {};
     if (PR_months > 0) {
       //Extract proofreading QR data (if applicable)
       var PR_month_data = pivot_sheet.getRange(4, 26, PR_months, 1).getValues();
       var PR_data = pivot_sheet.getRange(4, 30, PR_months, 1).getValues();
       
       //Calculate the average proofreaing QR scores for each month
-      var PR_avg = {};
       for (var i = 0; i < PR_months; i++) {
         var month_year = dateToMonthYear(PR_month_data[i][0]);
         if (Object.keys(PR_avg).indexOf(month_year) == -1) {
@@ -83,10 +83,8 @@ function getDataTable(type) {
     
     //Add data series labels
     var labels = [{label: 'Month', id: 'Month'}, 
-                  {label: 'QR Score', id: "QR", type: 'number'}];
-    if (PR_months > 0) {
-      labels.push({label: 'Average QR Score (Proofreading)', id: "PR", type: 'number'});
-    }
+                  {label: 'QR Score', id: "QR", type: 'number'},
+                 {label: 'Average QR Score (Proofreading)', id: "PR", type: 'number'}];
     
     var data_table = [labels];
     
@@ -115,6 +113,12 @@ function getDataTable(type) {
       date.setMonth(date.getMonth() - 1)
       current_month_year = dateToMonthYear(date);
     }
+    
+    if (PR_months == 0) {
+      for (var i = 0; i < data_table.length; i++) {
+        data_table[i].pop();
+      }
+    }    
   }
 
   //Data for time score and IF line charts
