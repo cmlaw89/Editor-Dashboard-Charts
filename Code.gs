@@ -216,7 +216,7 @@ function getGrade(score, stage) {
       return "F"
     }
   }
-  else if ((score >= 1) && (score < 2)) {
+  else if ((score >= 2) && (score < 3)) {
     if (stage == "QR") {
       return "D"
     }
